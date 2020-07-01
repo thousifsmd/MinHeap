@@ -20,34 +20,25 @@ public class MinHeap {
 	}
 	
 	public static void insertNode(int element) {
+		minHeap.add(element);
+		
 		int index = minHeap.size() - 1;
 		int temp;
-		int current = minHeap.size();
 		
-		if(current == 0) {
-			minHeap.add(element);
+		if(index == 0) {
+			return;
 		}
 		
-		while(index >= 0){
-			if(element < minHeap.get((index)/2)) {
-				temp = minHeap.get((index)/2);
-				minHeap.set(index/2, element);
-				
-				if(current > index) {
-					minHeap.add(current, temp);
-				} else {
-					minHeap.set(current, temp);
-				}
+		while(index > 0){
+			if(minHeap.get(index) < minHeap.get((index-1)/2)) {
+				temp = minHeap.get((index-1)/2);
+				minHeap.set((index-1)/2, element);
+				minHeap.set(index, temp);
 			} else {
-				if(current > index) {
-					minHeap.add(current, element);
-				} else {
-					break;
-				}
+				break;
 			}
 			
-			index = index/2;
-			current = index;
+			index = (index-1)/2;
 		}
 
 	}
